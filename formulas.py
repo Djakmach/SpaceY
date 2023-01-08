@@ -13,6 +13,10 @@ def Tsialkovskys_formula(I, m1, m2):
     dV = I * g * log(m1/m2)
     return dV
 
+def finished_mass_KA(I, m2, dV):
+    m1 = exp((dV/(I*g))) * m2
+    return m1
+
 
 def change_apogee_altitude(ra1, rp1, dra):
     """ Поиск минимальной величины управляющего импульса скорости, обеспечивающего изменение апогейного расстояния
@@ -44,8 +48,8 @@ def change_right_ascension_ascending_node(dOmega, ra1, rp1):
     :return dV: величина управляющего импульса скорости
     """
     dOmega = dOmega * pi / 180          # перевод в радианы
-    e1 = (ra1-rp1) / (ra1+rp1)
     a = (ra1 + rp1) / 2                 # большая полуось
+    e1 = (ra1-rp1) / (ra1+rp1)
     p1 = a * (1-e1)
-    dV = 2 * sqrt(MU/p1) * (1+e1*cos()) * sin(dOmega/2)
+    dV = 2 * sqrt(MU/p1) * (1+e1*cos(dOmega/2)) * sin(dOmega/2)
     return dV
