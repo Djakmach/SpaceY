@@ -3,10 +3,11 @@ from tkinter.messagebox import showinfo
 from formulas import *
 from math import *
 
+
+
 Hz = 6371
 FONT = ("Arial Bold", 14)
 parameters_satellite = (('Масса КА', 'кг'), ('Масса РТ', 'кг'), ('Тяга ДУ', 'Н'), ('Удельный импульс ДУ', 'сек'))
-
 
 initial_orbit_parameters = [
     ('Высота орбиты', 'км'),
@@ -32,10 +33,10 @@ indicators_satellite = (
 
 def create_block_with_data(cur_row, name_block, name_labels):
     lbl = Label(window, text=name_block, font=("Arial Bold", 20))
-    lbl.grid(column=0, row=cur_row,)
+    lbl.grid(column=0, row=cur_row, )
     cur_row += 1
     for idx, name_lbl in enumerate(name_labels):
-        Label(window, text=name_lbl[0], font=FONT,).grid(column=0, row=idx + cur_row, sticky="w")
+        Label(window, text=name_lbl[0], font=FONT, ).grid(column=0, row=idx + cur_row, sticky="w")
         Label(window, text=name_lbl[1], font=FONT).grid(column=2, row=idx + cur_row, sticky="w")
 
     cur_row += len(parameters_satellite)
@@ -76,7 +77,7 @@ def create_interface():
 def enter_result(*args):
     create_block_with_data(cur_row=18, name_block='Показатели КА', name_labels=indicators_satellite)
     for idx, row in enumerate(range(19, 24)):
-        Label(window, text=round(args[idx], 3), font=FONT).grid(column=1, row=row,)
+        Label(window, text=round(args[idx], 3), font=FONT).grid(column=1, row=row, )
 
     create_block_with_data(cur_row=24, name_block='Затраты Характеристической скорости', name_labels=(('dV', 'м/с'),))
     Label(window, text=round(args[-1], 3), font=FONT).grid(column=1, row=25, )
@@ -134,7 +135,6 @@ def calculate():
     )
 
 
-
 window = Tk()
 window.geometry('1000x1000')
 window.title("Расчет параметров орбитального маневра")
@@ -166,10 +166,25 @@ longitude_ascending_node_2.grid(column=1, row=12)
 argument_periapsis_2 = Entry(window, width=10)
 argument_periapsis_2.grid(column=1, row=13)
 
-
 value_change_altitude = BooleanVar()
 value_longitude_ascending_node = BooleanVar()
 # value_argument_periapsis = BooleanVar()
+
+def insert_value():
+    m_KA.insert(0, '250')
+    m_RT.insert(0, '200')
+    P.insert(0, '1')
+    I.insert(0, '100')
+    h_1.insert(0, '800')
+    i_1.insert(0, '63')
+    longitude_ascending_node_1.insert(0, '90')
+    argument_periapsis_1.insert(0, '90')
+    h_2.insert(0, '900')
+    longitude_ascending_node_2.insert(0, '90')
+    argument_periapsis_2.insert(0, '90')
+
+
+insert_value()
 
 
 change_altitude = Checkbutton(
@@ -200,7 +215,5 @@ select_2.grid(column=0, row=15)
 # select_3.grid(column=0, row=16)
 
 Button(text='Рассчитать', command=calculate).grid(column=2, row=17)
-
-
 
 window.mainloop()
