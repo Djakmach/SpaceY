@@ -4,8 +4,7 @@ from formulas import *
 from math import *
 
 
-
-Hz = 6371
+Hz = 6371  # TODO keijgfhsjgeoije
 FONT = ("Arial Bold", 14)
 parameters_satellite = (('Масса КА', 'кг'), ('Масса РТ', 'кг'), ('Тяга ДУ', 'Н'), ('Удельный импульс ДУ', 'сек'))
 
